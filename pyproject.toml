@@ -1,0 +1,110 @@
+[project]
+name = "cakedefi-kryptosekken"
+version = "1.0.0"
+description = "Convert CakeDeFi/Bake.io transaction data to Norwegian tax-compliant format for Kryptosekken"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENSE"}
+authors = [
+    {name = "CakeDeFi to Kryptosekken Tax Converter Contributors"}
+]
+keywords = [
+    "cryptocurrency", 
+    "tax", 
+    "norway", 
+    "cakedefi", 
+    "bake.io", 
+    "kryptosekken", 
+    "defi", 
+    "staking"
+]
+
+dependencies = [
+    "pytest>=8.3.5",
+    "requests>=2.25.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0.0",
+    "pytest-cov>=2.10.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Laende/cakedefi-kryptosekken-converter"
+Repository = "https://github.com/Laende/cakedefi-kryptosekken-converter.git"
+Issues = "https://github.com/Laende/cakedefi-kryptosekken-converter/issues"
+
+[project.scripts]
+cakedefi-kryptosekken = "process_transactions:main"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.12.9",
+]
+
+# Ruff configuration for code formatting and linting
+[tool.ruff]
+# Set the line length to 88 characters (black's default)
+line-length = 88
+
+# Exclude certain directories from linting
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "venv",
+    "build",
+    "dist",
+    "scripts",
+    "docs"
+]
+
+# Target Python 3.11+ for compatibility
+target-version = "py311"
+
+# Linter configuration (moved from top-level to lint section)
+[tool.ruff.lint]
+# Enable import sorting (replaces isort)
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # Pyflakes
+    "I",    # isort (import sorting)
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+]
+
+# Ignore certain rules
+ignore = [
+    "E501",  # Line too long (handled by formatter)
+    "B008",  # Do not perform function calls in argument defaults
+]
+
+# Configure import sorting (isort replacement)
+[tool.ruff.lint.isort]
+# Known first party modules (your own code)
+known-first-party = ["src", "tests"]
+
+# Import order: stdlib, third-party, first-party, local
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
+
+# Split imports onto separate lines when needed
+force-single-line = false
+force-sort-within-sections = true
+
+# Add a blank line between import sections
+split-on-trailing-comma = true
+lines-after-imports = 2
+
+# Configure formatter
+[tool.ruff.format]
+# Use double quotes for strings
+quote-style = "double"
+
+# Skip magic trailing comma
+skip-magic-trailing-comma = false
+
+# Prefer line breaks after opening brackets
+line-ending = "auto"
